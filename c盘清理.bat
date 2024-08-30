@@ -13,11 +13,15 @@ echo 清楚缓存数据...
 rmdir /S /Q %TMP%
 echo 清除缓存数据完成。
 
+rem::启动windows自带的磁盘清理，增加/sagerun:1参数会自动执行
+echo 正在启动windows自带的磁盘清理...
+start C:\Windows\System32\cleanmgr.exe 
 
-rem::清空回收站
-echo 正在清空回收站...
-del /f /s /q C:\$Recycle.Bin\
-echo 回收站已清空。
+
+@REM rem::清空回收站
+@REM echo 正在清空回收站...
+@REM del /f /s /q C:\$Recycle.Bin\
+@REM echo 回收站已清空。
 
 
 rem::关闭系统休眠功能
@@ -25,6 +29,9 @@ echo 正在关闭系统休眠功能...
 powercfg -h off
 echo 系统休眠功能已关闭，重启后生效
 
+
+rem::请手动修改虚拟内存设置
+systempropertiesadvanced
 
 
 rem:: 下载文件CCleaner-Pro-6.27.11214-x64-Plus.exe 并安装
