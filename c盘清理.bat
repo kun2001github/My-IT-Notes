@@ -32,7 +32,6 @@ systempropertiesadvanced
 echo ******手动迁移微信以及QQ聊天记录******
 
 
-
 echo 回车下载CCleaner& pause
 
 rem:: 下载文件CCleaner-Pro-6.27.11214-x64-Plus.exe 并安装
