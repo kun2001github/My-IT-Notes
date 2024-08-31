@@ -1,38 +1,40 @@
-@echo off
-
 rem::解决中文乱码的
 chcp 65001
 
 rem::获取管理员权限
+@echo off
 %1 mshta vbscript:CreateObject("Shell.Application").ShellExecute("cmd.exe","/c %~s0 ::","","runas",1)(window.close)&&exit
 cd /d "%~dp0"
 
 
-rem:: 清楚缓存数据
 echo 清楚缓存数据...
 rmdir /S /Q %TMP%
-echo 清除缓存数据完成。
+echo ******清除缓存数据完成******
 
-rem::启动windows自带的磁盘清理，增加/sagerun:1参数会自动执行
+
 echo 正在启动windows自带的磁盘清理...
+rem::可增加/sagerun:1参数会自动执行
 start C:\Windows\System32\cleanmgr.exe 
 
 
-@REM rem::清空回收站
 @REM echo 正在清空回收站...
 @REM del /f /s /q C:\$Recycle.Bin\
 @REM echo 回收站已清空。
 
 
-rem::关闭系统休眠功能
 echo 正在关闭系统休眠功能...
 powercfg -h off
-echo 系统休眠功能已关闭，重启后生效
+echo ******系统休眠功能已关闭，重启后生效******
 
 
-rem::请手动修改虚拟内存设置
+echo 手动修改虚拟内存设置
 systempropertiesadvanced
 
+echo ******手动迁移微信以及QQ聊天记录******
+
+
+
+echo 回车下载CCleaner& pause
 
 rem:: 下载文件CCleaner-Pro-6.27.11214-x64-Plus.exe 并安装
 echo 下载CCleaner并弹窗安装...
@@ -40,7 +42,7 @@ curl -O "https://116-142-255-134.pd1.cjjd19.com:30443/download-cdn.cjjd19.com/12
 rename c-m48 CCleaner-Pro-6.27.11214-x64-Plus.exe
 CCleaner-Pro-6.27.11214-x64-Plus.exe
 
-
+echo 回车下载WizTree磁盘空间分许工具& pause
 
 
 rem::下载WizTree V4.19 并安装   （为什么选择他，应为他比 SpaceSniffer更加直观）
