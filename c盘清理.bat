@@ -27,6 +27,7 @@ powercfg -h off
 echo ******系统休眠功能已关闭，重启后生效******
 
 
+
 echo 手动修改虚拟内存设置
 systempropertiesadvanced
 
