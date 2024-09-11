@@ -4,6 +4,7 @@ git官方文档：[Git - Book (git-scm.com)](https://git-scm.com/book/zh/v2)
 
 git安装教程:[Git - 安装 Git (git-scm.com)](https://git-scm.com/book/zh/v2/%E8%B5%B7%E6%AD%A5-%E5%AE%89%E8%A3%85-Git)
 
+### 基础
 
 Git 自带一个 `git config` 的工具来帮助设置控制 Git 外观和行为的配置变量。 这些变量存储在三个不同的位置：
 
@@ -42,8 +43,6 @@ $ git config --global user.email johndoe@example.com
 
 你可以通过输入 `git config <key>`： 来检查 Git 的某一项配置：例如：git config user.name
 
-
-
 由于 Git 会从多个文件中读取同一配置变量的不同值，因此你可能会在其中看到意料之外的值而不知道为什么。 此时，你可以查询 Git 中该变量的 **原始** 值，它会告诉你哪一个配置文件最后设置了该值：--show-origin
 
 ```console
@@ -53,3 +52,52 @@ file:/home/johndoe/.gitconfig	false
 $ git config --show-origin user.name 
 file:C:/Users/MVGZ0040/.gitconfig       kun2001github
 ```
+
+### 获取仓库
+
+通常有两种获取 Git 项目仓库的方式：
+
+1. 将尚未进行版本控制的本地目录转换为 Git 仓库；
+2. 从其它服务器 **克隆** 一个已存在的 Git 仓库。
+
+```
+初始化仓库
+$git init
+
+添加到暂存区
+$ git add *.c
+$ git add LICENSE
+
+提交到仓库，注意需要加-m 否则默认是使用vim打开提交的信息的编辑
+$ git commit -m 'initial project version'
+```
+
+执行git init 命令后，则会在当前文件夹创建.git目录，该目录包含了几乎所有的Git存储和操作的东西，具体目录结构如下（新版本可能有点差异，但是基本都差不多）
+
+| config      | 包含项目特有的配置选项
+| ----------- | ---------------------- | 
+| description | 仅供GitWeb程序使用
+| info | 一个全局性排除（global exclude）文件，用以放置那些不希望被记录在 `.gitignore` 文件中的忽略模式（ignored patterns） |
+|hooks|包含客户端或者服务端的钩子脚本（hook scripts）
+|以下是Git的核心组成部分|
+|objects目录|存储所有数据内容
+|refs目录|存储指定数据（分支、远程仓库和标签等）的提交对象的指针
+|HEAD文件|指向目前被检出的分支
+|index文件| 保存暂存区信息
+
+### 克隆远程仓库
+
+```
+git clone <url>
+例如：
+$ git clone https://github.com/libgit2/libgit2
+
+如果你想在克隆远程仓库的时候，自定义本地仓库的名字，你可以通过额外的参数指定新的目录名：
+例如：
+$ git clone https:://github.com/libgit2/libgit2 mylibgit
+```
+
+Git 支持多种数据传输协议。 上面的例子使用的是 `https://` 协议，不过你也可以使用 `git://` 协议或者使用 SSH 传输协议，比如 `user@server:path/to/repo.git`
+
+
+
