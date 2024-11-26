@@ -1,0 +1,45 @@
+## 首要条件
+
+1.有个U盘的PE系统
+
+2.对需要扩容的电脑进行解锁BitLocker
+
+​	2.1以管理员打开cmd，输入manage-bde -status，如果加密了会显示已加密百分比，否则无
+
+![Clip_2024-11-05_15-01-33](C:\Users\MVGZ0040\Desktop\my-windows-work-script\images\Windows的C盘扩容\Clip_2024-11-05_15-01-33.png)
+
+​		2.2解除加密命令：manage-bde -off C:
+
+## 实际操作步骤
+
+进入PE系统，根据自己的电脑型号切换启动顺序即可：（公司电脑）
+
+​	联想、华为开机按F12
+
+​	惠普开机按F9
+
+​	SMI微星主板按F11
+
+以下使用联想笔记本演示的演示
+
+![Clip_2024-11-05_17-15-03](C:\Users\MVGZ0040\Desktop\my-windows-work-script\images\Windows的C盘扩容\Clip_2024-11-05_17-15-03.png)
+
+
+
+![Clip_2024-11-05_17-16-39](C:\Users\MVGZ0040\Desktop\my-windows-work-script\images\Windows的C盘扩容\Clip_2024-11-05_17-16-39-1730798207126-5.png)
+
+![Clip_2024-11-05_17-17-13](C:\Users\MVGZ0040\Desktop\my-windows-work-script\images\Windows的C盘扩容\Clip_2024-11-05_17-17-13.png)
+
+![Clip_2024-11-05_17-18-14](C:\Users\MVGZ0040\Desktop\my-windows-work-script\images\Windows的C盘扩容\Clip_2024-11-05_17-18-14.png)
+
+![Clip_2024-11-05_17-19-07](C:\Users\MVGZ0040\Desktop\my-windows-work-script\images\Windows的C盘扩容\Clip_2024-11-05_17-19-07.png)
+
+![Clip_2024-11-05_17-22-49](C:\Users\MVGZ0040\Desktop\my-windows-work-script\images\Windows的C盘扩容\Clip_2024-11-05_17-22-49.png)
+
+![Clip_2024-11-05_17-22-09](C:\Users\MVGZ0040\Desktop\my-windows-work-script\images\Windows的C盘扩容\Clip_2024-11-05_17-22-09.png)
+
+![Clip_2024-11-05_17-23-22](C:\Users\MVGZ0040\Desktop\my-windows-work-script\images\Windows的C盘扩容\Clip_2024-11-05_17-23-22.png)
+
+![Clip_2024-11-05_17-23-51](C:\Users\MVGZ0040\Desktop\my-windows-work-script\images\Windows的C盘扩容\Clip_2024-11-05_17-23-51.png)
+
+![Clip_2024-11-05_17-24-51](C:\Users\MVGZ0040\Desktop\my-windows-work-script\images\Windows的C盘扩容\Clip_2024-11-05_17-24-51.png)
