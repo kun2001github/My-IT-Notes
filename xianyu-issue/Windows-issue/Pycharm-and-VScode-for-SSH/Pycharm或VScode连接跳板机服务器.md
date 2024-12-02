@@ -1,3 +1,5 @@
+
+
 # 说明
 
 本教程适用于Pycharm和VScode使用
@@ -89,6 +91,165 @@ IdentityFile ~/.ssh/id_rsa   # 用于指定私钥的路径
 
 
 
+
+
+
+
+
+
+# 免密登录
+
+确保已经安装了sudo apt install openssh-server
+
+## 生成密钥：(主机)
+
+```
+ssh-keygen -t rsa -b 4096 -C Email@qq.com
+```
+
+ssh-keygen常见参数：
+
+```
+-t：指定生成密钥的类型，默认使用SSH2d的rsa
+-f：指定生成密钥的文件名，默认id_rsa（私钥id_rsa，公钥id_rsa.pub）
+-b：指定密钥长度（bits），RSA最小要求768位，默认是2048位；DSA密钥必须是1024位（FIPS 1862标准规定）
+-C：添加注释；
+-P：提供旧密码，空表示不需要密码（-P ‘’）
+-N：提供新密码，空表示不需要密码(-N ‘’)
+-R ``hostname``：从known_hosta（第一次连接时就会在家目录.``ssh``目录下生产该密钥文件）文件中删除所有属于``hostname``的密钥
+-e：读取openssh的私钥或者公钥文件；
+-i：读取未加密的``ssh``-v2兼容的私钥/公钥文件，然后在标准输出设备上显示openssh兼容的私钥/公钥；
+-l：显示公钥文件的指纹数据；
+-q：静默模式；
+```
+
+
+
+## 把公钥上传到服务器
+
+```
+ssh-copy-id remote_username@server_ip_address     
+```
+
+ 如果没有该命令的话就手动吧
+
+把~/.ssh/下的*.pub就是公钥，用记事本打开，拷贝里面的内容，然后复制粘贴到服务器的~/.ssh/authorized_keys中，如果没有authorized_keys就手动创建
+
+注意权限：
+
+```
+chmod 600 authorized_keys
+chmod 700 .ssh
+```
+
+
+
+
+
+
+
+## 配置sshd服务启动密钥登录
+
+配置文件在/etc/ssh/sshd_config，配置好了后，重启systemctl restart sshd
+
+```
+RSAAuthentication yes 						#允许使用RSA密钥认证
+PubkeyAuthentication yes 					#启用公钥认证
+AuthorizedKeysFile .ssh/authorized_keys 	#指定授权密钥文件的位置
+```
+
+其他常用的选项
+
+```
+Port 2222  				    #SSH服务监听的端口，默认是22
+ListenAddress 0.0.0.0		#指定 SSH 服务监听的网络接口
+PasswordAuthentication yes	#允许密码登录
+PermitRootLogin yes			#允许ROOT用户登录
+MaxStartups 10:30:60		#限制同时打开的 SSH 连接数,同时最多有 10 个未认证的连接，未认证的连接超过 30 个后，新的连接将被排队，超过 60 个后，新的连接将被拒绝
+AcceptEnv SSH_KEY_EXPIRY	#允许密钥用不过期，需要export SSH_KEY_EXPIRY=0
+AllowTcpForwarding yes		#允许或禁止 TCP 转发
+PermitTunnel no				#允许或禁止端口转发
+ClientAliveInterval 600		#设置服务器向客户端发送消息的间隔，以保持连接活跃（可以实现ssh会话用不超时）（表示每个600秒，也就是10分钟，发送一次消息，确保永不超时）
+ClientAliveCountMax 3		#设置在客户端没有响应时服务器尝试发送消息的次数（服务器在3次（默认每次间隔60秒）内没有收到客户端的消息，服务器将关闭连接）
+AllowUsers username1 username2  #设置限制可以SSH登录的用户
+AllowGroups groupname			#设置SSH登录的组
+DenyUsers username1				#禁止特定用户SSH 登录
+DenyGroups groupname			#禁止特定组的SSH 登录
+Banner /etc/ssh/banner.txt		#显示一个欢迎信息或法律声明
+```
+
+### 如果需要配置ssh连接永不过超时
+
+在客户端添加如下配置vim ~/.ssh/config
+
+```
+Host *
+    ServerAliveInterval 60
+    ServerAliveCountMax 3
+
+
+这里 ServerAliveInterval 设置为 60 秒，意味着每 60 秒客户端会向服务器发送一个空包，以保持连接活跃。ServerAliveCountMax 设置为 3，意味着如果服务器在 3 次（每次间隔 60 秒）内没有响应，客户端才会认为连接已断开。
+
+如果您希望完全禁用超时，可以将 ServerAliveCountMax 设置为一个非常大的数字，比如 ServerAliveCountMax 9999。
+```
+
+在服务端添加如下配置sudo vim /etc/ssh/sshd_config
+
+```
+ClientAliveInterval 0
+ClientAliveCountMax 3
+
+这里 ClientAliveInterval 设置为 0，意味着服务器不会主动发送消息来保持连接活跃。ClientAliveCountMax 设置为 3，意味着如果服务器在 3 次（默认每次间隔 60 秒）内没有收到客户端的消息，服务器将关闭连接。
+
+如果您希望完全禁用超时，可以将 ClientAliveCountMax 设置为 0，但请注意这可能会增加安全风险，因为即使客户端已经断开，服务器也不会主动关闭连接。
+```
+
+
+
+# SSH连接问题
+
+SSH版本：OpenSSH_6.6.1p1 Ubuntu-2ubuntu2.12, OpenSSL 1.0.1f 6 Jan 2014
+
+系统：Ubuntu14.04
+
+现象：已经在sshd服务器里面设置了
+
+原因是：因为密钥的原因，详细待更新
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## Pycharm连接堡垒机服务器 适用于JumpServer堡垒机的方法
 
 [【V2/V3】JumpServer 如何通过 PyCharm 连接 - FIT2CLOUD 知识库](https://kb.fit2cloud.com/?p=d85d8229-151a-42f4-b746-b0e65ab097fa#heading-1)
@@ -117,7 +278,7 @@ IdentityFile ~/.ssh/id_rsa   # 用于指定私钥的路径
 
 
 
-#### 参考
+#### SSH参考
 
 #### [SSH隧道技术----端口转发，socket代理 - 登高行远 - 博客园](https://www.cnblogs.com/fbwfbi/p/3702896.html)
 
@@ -126,6 +287,12 @@ IdentityFile ~/.ssh/id_rsa   # 用于指定私钥的路径
 [使用xshell 设置pycharm>跳板机>服务器的远程开发环境 - 阳光少年部落格](https://www.coder.rs/实用工具/设置pycharm>跳板机>服务器的远程开发环境/)
 
 [Pycharm通过跳板机（堡垒机）连接内网服务器教程 - 知乎](https://zhuanlan.zhihu.com/p/661802126)
+
+
+
+
+
+# SSH免密登录参考
 
 
 
