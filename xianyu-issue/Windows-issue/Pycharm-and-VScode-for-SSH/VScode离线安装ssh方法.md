@@ -1,0 +1,1 @@
+参考地址：[VScode连接远程服务器踩坑实战（新版离线vscode-server安装）_vscode离线远程连接服务器-CSDN博客](https://blog.csdn.net/m0_55245520/article/details/142825720)
