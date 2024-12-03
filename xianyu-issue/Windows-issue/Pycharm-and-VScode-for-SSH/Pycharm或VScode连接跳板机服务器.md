@@ -224,6 +224,16 @@ SSH版本：OpenSSH_6.6.1p1 Ubuntu-2ubuntu2.12, OpenSSL 1.0.1f 6 Jan 2014
 
 
 
+# 通过VScode的SSH连接Winodws服务器
+
+### 在Windows服务器安装openssh-server
+
+
+
+
+
+##### 解决windows禁用powershell脚本
+
 
 
 
