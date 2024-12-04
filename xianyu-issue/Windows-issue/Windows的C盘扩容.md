@@ -6,7 +6,7 @@
 
 ​	2.1以管理员打开cmd，输入manage-bde -status，如果加密了会显示已加密百分比，否则无
 
-![Clip_2024-11-05_15-01-33](C:\Users\MVGZ0040\Desktop\my-windows-work-script\images\Windows的C盘扩容\Clip_2024-11-05_15-01-33.png)
+![Clip_2024-11-05_15-01-33](./images/Windows的C盘扩容/Clip_2024-11-05_15-01-33.png)
 
 ​		2.2解除加密命令：manage-bde -off C:
 
@@ -22,24 +22,24 @@
 
 以下使用联想笔记本演示的演示
 
-![Clip_2024-11-05_17-15-03](C:\Users\MVGZ0040\Desktop\my-windows-work-script\images\Windows的C盘扩容\Clip_2024-11-05_17-15-03.png)
+![Clip_2024-11-05_17-15-03](./images/Windows的C盘扩容/Clip_2024-11-05_17-15-03.png)
 
 
 
-![Clip_2024-11-05_17-16-39](C:\Users\MVGZ0040\Desktop\my-windows-work-script\images\Windows的C盘扩容\Clip_2024-11-05_17-16-39-1730798207126-5.png)
+![Clip_2024-11-05_17-16-39](./images/Windows的C盘扩容/Clip_2024-11-05_17-16-39-1730798207126-5.png)
 
-![Clip_2024-11-05_17-17-13](C:\Users\MVGZ0040\Desktop\my-windows-work-script\images\Windows的C盘扩容\Clip_2024-11-05_17-17-13.png)
+![Clip_2024-11-05_17-17-13](./images/Windows的C盘扩容/Clip_2024-11-05_17-17-13.png)
 
-![Clip_2024-11-05_17-18-14](C:\Users\MVGZ0040\Desktop\my-windows-work-script\images\Windows的C盘扩容\Clip_2024-11-05_17-18-14.png)
+![Clip_2024-11-05_17-18-14](./images/Windows的C盘扩容/Clip_2024-11-05_17-18-14.png)
 
-![Clip_2024-11-05_17-19-07](C:\Users\MVGZ0040\Desktop\my-windows-work-script\images\Windows的C盘扩容\Clip_2024-11-05_17-19-07.png)
+![Clip_2024-11-05_17-19-07](./images/Windows的C盘扩容/Clip_2024-11-05_17-19-07.png)
 
-![Clip_2024-11-05_17-22-49](C:\Users\MVGZ0040\Desktop\my-windows-work-script\images\Windows的C盘扩容\Clip_2024-11-05_17-22-49.png)
+![Clip_2024-11-05_17-22-49](./images/Windows的C盘扩容/Clip_2024-11-05_17-22-49.png)
 
-![Clip_2024-11-05_17-22-09](C:\Users\MVGZ0040\Desktop\my-windows-work-script\images\Windows的C盘扩容\Clip_2024-11-05_17-22-09.png)
+![Clip_2024-11-05_17-22-09](./images/Windows的C盘扩容/Clip_2024-11-05_17-22-09.png)
 
-![Clip_2024-11-05_17-23-22](C:\Users\MVGZ0040\Desktop\my-windows-work-script\images\Windows的C盘扩容\Clip_2024-11-05_17-23-22.png)
+![Clip_2024-11-05_17-23-22](./images/Windows的C盘扩容/Clip_2024-11-05_17-23-22.png)
 
-![Clip_2024-11-05_17-23-51](C:\Users\MVGZ0040\Desktop\my-windows-work-script\images\Windows的C盘扩容\Clip_2024-11-05_17-23-51.png)
+![Clip_2024-11-05_17-23-51](./images/Windows的C盘扩容/Clip_2024-11-05_17-23-51.png)
 
-![Clip_2024-11-05_17-24-51](C:\Users\MVGZ0040\Desktop\my-windows-work-script\images\Windows的C盘扩容\Clip_2024-11-05_17-24-51.png)
+![Clip_2024-11-05_17-24-51](./images/Windows的C盘扩容/Clip_2024-11-05_17-24-51.png)

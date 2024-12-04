@@ -94,9 +94,7 @@ Failed to connect to bus: Host is down
 ```
 root@b3d85d76bf67:~# service xrdp start                                                                                               
  * Starting Remote Desktop Protocol server                                                                                            
-xrdp-sesman[25734]: [INFO ] starting xrdp-sesman with pid 25734                                                                       
-                                                                                                                                      
-                                                                                                                               [ OK ] 
+xrdp-sesman[25734]: [INFO ] starting xrdp-sesman with pid 25734                [ OK ] 
 ```
 
 
