@@ -242,15 +242,42 @@ SSH版本：OpenSSH_6.6.1p1 Ubuntu-2ubuntu2.12, OpenSSL 1.0.1f 6 Jan 2014
 
 
 
+# vscode通过ssh连接服务器报错原因总结
 
 
 
+第一：版本导致
 
+第二：没法下载vscode-server
 
+第三：服务存储爆满导致的，具体如：
 
+>  mkdir: 无法创建目录 "/home/20222409wqb/.vscode-server": No space left on device 
 
+> chmod: 无法访问 '/home/20222409wqb/.vscode-server': No such file or directory
 
+解决方案：删除掉没用的，或者是扩容空间
 
+```
+找出当前目录下最大的文件夹：
+du -sh * | sort -hr | head -n 10
+这个命令会显示当前目录下最大的10个文件夹。
+
+递归查找最大的文件夹：
+du -sh /* | sort -hr | head -n 10
+这个命令会显示根目录下最大的10个文件夹。
+
+排除某些目录：
+如果你想要排除某些目录（比如 .git 或 node_modules），可以使用 grep 来过滤掉它们：
+du -sh --exclude='.git' --exclude='node_modules' * | sort -hr | head -n 10
+
+使用通配符排除多个目录：
+du -sh --exclude='*.git' --exclude='*node_modules*' * | sort -hr | head -n 10
+
+指定目录查找最大的文件夹：
+如果你想要查找特定目录下最大的文件夹，可以将路径替换为该目录：
+du -sh /path/to/directory/* | sort -hr | head -n 10
+```
 
 
 
