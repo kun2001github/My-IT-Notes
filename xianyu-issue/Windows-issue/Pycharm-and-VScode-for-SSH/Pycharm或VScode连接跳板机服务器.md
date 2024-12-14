@@ -89,9 +89,26 @@ ForwardAgent yes  # 用于启用 SSH 代理转发（也称为 SSH 代理连接�
 IdentityFile ~/.ssh/id_rsa   # 用于指定私钥的路径
 ```
 
+# 问题，堡垒机禁止SSH转发导致的一些列问题
+
+![image-20241214113915683](./images/Pycharm或VScode连接跳板机服务器/image-20241214113915683.png)
+
+C:\Users\DELL>ssh 247
+Welcome to JumpServer SSH Server
+xujuan.hyd@10.0.6.250's password:
+channel 0: open failed: administratively prohibited: port forwarding is disabled
+stdio forwarding failed
+Connection closed by UNKNOWN port 65535
 
 
 
+ssh -p2222 jumpserverUsername@systemUsername@AssetIP@jumpserverHostIP
+
+通过PyCharm连接JumpServer堡垒机中的服务器中的conda提示如下：
+
+![image-20241214125804549](./images/Pycharm或VScode连接跳板机服务器/image-20241214125804549.png)
+
+可能解决的方法：编辑SSH服务器配置文件（通常位于`/etc/ssh/sshd_config`），确保`AllowTcpForwarding`设置为`yes`
 
 
 

@@ -22,6 +22,24 @@
 
 
 
+# VScode 通过ssh连接服务器，使用不了ctrl跳转不了函数
+
+问题描述：VScode 通过ssh连接服务器，使用不了ctrl跳转不了函数，但是其他人连接这个服务器是可以的，就是我不行。
+
+原因：可能是服务器的插件版本与本地的版本不同导致的（vscode开启了自动升级，但是插件没有升级）
+
+解决方法：把服务器的所有插件都删掉，本地的也都删掉，重新连接安装即可解决
+
+
+
+
+
+
+
+
+
+
+
 参考：
 
 [vscode pylance取消语法高亮_pylance开启semantic highlighting-CSDN博客](https://blog.csdn.net/onion_rain/article/details/115857414)
