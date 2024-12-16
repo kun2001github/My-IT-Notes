@@ -298,7 +298,9 @@ du -sh /path/to/directory/* | sort -hr | head -n 10
 
 
 
+# PyCharm版本
 
+最好使用2024.03版本对conda支持比较好，使用2021的版本在添加ssh的python解释器的时候是没有conda这个选择的
 
 
 
