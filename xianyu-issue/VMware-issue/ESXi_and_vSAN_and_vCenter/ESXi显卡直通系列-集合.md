@@ -124,11 +124,8 @@ hypervisor.cpuid.v0= FALSE
 
 ```
 lsmod | grep nouveau    # 有输出代表已启用
-
-
-
-#禁用nouveau启动方法1
-
+-------------------------------------------
+    ##禁用nouveau启动方法1
 vim /lib/modprobe.d/dist-blacklist.conf
     #将 nvidiafb 配置注释掉。
         # blacklist nvidiafb
@@ -137,35 +134,40 @@ vim /lib/modprobe.d/dist-blacklist.conf
         options nouveau modeset=0
     #保存退出
          :wq!
-     
-#禁用内核模块 nouveau启动方法2
+------------------------------------------
+    ##禁用内核模块 nouveau启动方法2
 vim /etc/modprobe.d/blacklist-nvidia-nouveau.conf
-    @在尾部添加：
+    #在尾部添加：
         blacklist nouveau
         options nouveau modeset=0     
     #保存退出
         :wq!
-
-
-重建 initramfs方法1
+--------------------------------------------
+   #重建 initramfs方法1（Centos）
 重建 initramfs image（ initramfs 是一个临时的文件系统,其中包含了必要的设备如硬盘、网卡、文件系统等的驱动以及加载驱动的工具及其运行环境,比如基本的C库,动态库的链接加载器等。）
-# 备份一下mv /boot/initramfs-$(uname -r).img /boot/initramfs-$(uname -r).img.bak 
-# 更新dracut /boot/initramfs-$(uname -r).img $(uname -r) --force
-将重建的 initramfs 同步至内核
-
-# 安装依赖yum install -y vim wget yum-util net-tools epel-release gcc gcc-c++ make dkms  
-# 同步至内核yum install -y "kernel-devel-uname-r == $(uname -r)"
-
-
-重建initramfs方法2
+    # 备份一下
+mv /boot/initramfs-$(uname -r).img /boot/initramfs-$(uname -r).img.bak 
+    # 更新
+dracut /boot/initramfs-$(uname -r).img $(uname -r) --force
+    # 将重建的 initramfs 同步至内核
+    # 安装依赖
+yum install -y vim wget yum-util net-tools epel-release gcc gcc-c++ make dkms  
+    # 同步至内核
+yum install -y "kernel-devel-uname-r == $(uname -r)"
+----------------------------------------------
+    #重建initramfs方法2（Ubuntu）
 sudo update-initramfs -u
-
-
-#重启系统使配置生效
+-----------------------------------------
+	#重建initramfs方法3（Fedora）
+sudo dracut --force
+-------------------------------------
+	#重建initramfs方法4（OpenSUSE）（重新生成initrd）
+sudo /sbin/mkinitrd
+----------------------------------------
+    #重启系统使配置生效
 reboot
-
-
-#再次验证 nouveau 驱动是否已禁用
+-------------------------------------------------
+    #再次验证 nouveau 驱动是否已禁用
 lsmod | grep nouveau  # 没输出代表禁用生效
 ```
 
@@ -224,6 +226,43 @@ http://gpu.jy6d.com/
 
 
 ![图片](./images/ESXi显卡直通系列-集合/640-1735049820530-81.jpeg)
+
+
+
+### 卸载nvidia显卡驱动
+
+```
+方法一：
+#先查看驱动以及版本安装情况，命令如下：
+ls /usr/src | grep nvidia
+ 
+#进入安装目录，用驱动自带卸载命令卸载，一般情况下能卸载干净
+cd /usr/bin
+ls nvidia-*
+sudo nvidia-uninstall
+ 
+#然后用上面的查看命令查看是否卸载干净，完成卸载
+ls /usr/src | grep nvidia
+ 
+#如果需要卸载干净所有英伟达驱动命令，如下
+sudo apt-get remove --purge nvidia-*（/nvidia*)
+sudo apt autoremove   # 此命令在万般无奈之下在使用，可能会卸载无辜软件，影响稳定性。。。
+ 
+ 
+方法二：（推荐）
+ 
+#直接卸载驱动
+sudo ./显卡驱动包名称 --uninstall
+ 
+#卸载两件套
+sudo apt-get purge nvidia*
+sudo apt-get autoremove
+sudo reboot
+```
+
+
+
+
 
 
 
