@@ -18,7 +18,11 @@ sudo apt-get install virtualbox-guest-dkms
 
 PS：记得在状态栏》设备》共享粘贴板/拖放/开启状态哦
 
+## 另外一个（待测试）
 
+	sudo apt-get update
+	sudo apt-get dist-upgrade
+	sudo apt-get install virtualbox-guest-x11
 
 
 

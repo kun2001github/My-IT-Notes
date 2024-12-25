@@ -1,0 +1,1 @@
+解决方法：[WslRegisterDistribution failed with error: 0x80071772-CSDN博客](https://blog.csdn.net/old__tree/article/details/125990962)
