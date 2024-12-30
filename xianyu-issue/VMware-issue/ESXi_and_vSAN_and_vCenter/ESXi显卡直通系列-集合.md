@@ -202,6 +202,14 @@ nvidia-smi
 
 
 
+注意：
+nvidia-driver-xxx :这是适配大多数用户，一般情况下都可以安装这个
+nvidia-driver-xxx-server ：这个适配服务器，有多块GPU调度等情况
+nvidia-driver-xxx-open ：这个是开源版本，可以自己修改
+
+
+
+
 
 报错获取更多信息：
 cat /proc/driver/nvidia/version
@@ -318,3 +326,5 @@ https://mp.weixin.qq.com/s/C4NKPSMErlhNkkTJSpcsEg
 https://mp.weixin.qq.com/s/j1xqWQiR-70ac9w1b7N-3w
 
 https://mp.weixin.qq.com/s/eHWKTPY1BLZO_nsw0UDUkw
+
+[Ubuntu22.04 LTS 安装nvidia显卡驱动 - cyMessi - 博客园](https://www.cnblogs.com/cyMessi/p/18627184)
