@@ -121,7 +121,7 @@ ssh -p2222 jumpserverUsername@systemUsername@AssetIP@jumpserverHostIP
 ## 生成密钥：(主机)
 
 ```
-ssh-keygen -t rsa -b 4096 -C Email@qq.com
+ssh-keygen -t ed25519 -b 4096 -C Email@qq.com
 ```
 
 ssh-keygen常见参数：
