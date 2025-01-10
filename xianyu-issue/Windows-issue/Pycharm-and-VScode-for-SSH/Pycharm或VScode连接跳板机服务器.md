@@ -45,16 +45,33 @@ ssh -f -N -L 本地端口号:内网服务器IP(目标服务器):内网服务器�
 -i /ptah/to/sshkey 
 # 用于指定公钥的位置
 
-例如：
-目标服务器（堡垒机中的服务器）：192.168.0.100 端口号是：223
-服务器的用户名：root
-堡垒机（跳板机）：130.130.130.13 端口号是：600
-堡垒机用户名：demo
+例如：把本地端口888转发到目标服务器
+    目标服务器（堡垒机中的服务器）：192.168.0.100 端口号是：223
+    服务器的用户名：root
+    堡垒机（跳板机）：130.130.130.13 端口号是：600
+    堡垒机用户名：demo
 
-要求：把本地端口888转发到目标服务器
-sh -f -N -L 888:192.168.0.100:223 demo@130.130.130.13 -o TCPKeepAlive=yes
-连接：
-ssh -p 888 root@127.0.0.1
+    要求：把本地端口888转发到目标服务器
+    ssh -f -N -L 888:192.168.0.100:223 demo@130.130.130.13 -o TCPKeepAlive=yes
+
+    连接：
+    ssh -p 888 root@127.0.0.1
+
+案例：需要把远程内网服务器的jupyter映射到本地浏览器中使用
+    连接服务器的操作：
+    卸载命令：conda remove jupyter jupyterlab notebook  或 pip uninstall jupyter jupyterlab notebook
+    删除残留：rm -rf ~/.jupyter   和   rm -rf ~/.local/share/jupyter
+    重新安装：conda install jupyter jupyterlab notebook  或pip install jupyter jupyterlab notebook
+    验证安装：jupyter notebook 或 jupyter lab
+    配置密码：jupyter notebook password
+    允许访问的IP（默认只允许本地访问）：jupyter notebook --ip=0.0.0.0
+    指定端口号：jupyter notebook --ip=0.0.0.0 --port=9999
+
+    在本地CMD的命令行输入：
+    ssh -f -N -L 6688:127.0.0.1:8888 guanyl@172.31.180.22 -o  TCPKeepAlive=yes
+
+    打开浏览器访问：
+    http://127.0.0.1:6688
 ```
 
 ### 可以通过第三方软件实现一样的效果例如：xhell，Mobaxterm，tabby等等工具都可以用实现
