@@ -306,6 +306,34 @@ du -sh /path/to/directory/* | sort -hr | head -n 10
 
 
 
+
+
+能ping通
+
+
+
+respecting_nature@YunChus-MacBook-Pro ~ % ssh respecting_god@10.210.72.90
+kex_exchange_identification:read: Connection reset by peer
+Connection reset by 10.210.72.90 port 22
+respecting_nature@YunChus-MacBook-Pro ~%
+respecting_nature@YunChus-MacBook-Pro~%
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## Pycharm连接堡垒机服务器 适用于JumpServer堡垒机的方法
 
 [【V2/V3】JumpServer 如何通过 PyCharm 连接 - FIT2CLOUD 知识库](https://kb.fit2cloud.com/?p=d85d8229-151a-42f4-b746-b0e65ab097fa#heading-1)

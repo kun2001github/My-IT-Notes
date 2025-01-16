@@ -105,6 +105,11 @@ sudo gpasswd --add $USER vboxusers
 
 
 
+![image-20250112151956117](./images/Virtualbox扩展功能复制粘贴拖拽文件共享/image-20250112151956117.png)
+
+
+
+
 
 
 
