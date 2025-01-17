@@ -22,7 +22,7 @@ wssybbz@ubuntu:~$ sudo ./Steam++.sh    #启动Watt Toolkit
 
 打开终端后，输入以及命令（如图）
 
-sudo bash environment_check.sh 
+sudo bash environment_check.sh
 
 ![image-20250116213002330](./images/Ubuntu安装steamtools和venv/image-20250116213002330.png)
 
@@ -38,8 +38,6 @@ sudo bash environment_check.sh
 
 ![image-20250116215115191](./images/Ubuntu安装steamtools和venv/image-20250116215115191.png)
 
-
-
 ## 方案2-使用/etc/hosts实现
 
 ```
@@ -49,6 +47,7 @@ wssybbz@ubuntu:~$ sudo cp /etc/hosts /etc/hosts.bak
 wssybbz@ubuntu:~$ sudo gedit /etc/hosts
 
 把这些内容全部复制粘贴到/etc/hosts中
+
 #Github Hosts Start
 #Update Time: 2025-01-17
 #Project Address: https://github.com/maxiaof/github-hosts
@@ -93,13 +92,13 @@ wssybbz@ubuntu:~$ sudo gedit /etc/hosts
 #Github Hosts End
 
 粘贴完成后，就保存退出 
+# 刷新DNS
+sudo nscd restart
 ```
 
 如果你需要获取最新的hosts，可以点击这个链接获取（一般只有Github访问不了才需要更新）
 
 [maxiaof/github-hosts: 通过修改Hosts解决国内Github经常抽风访问不到,每日更新](https://github.com/maxiaof/github-hosts)
-
-
 
 ## 安装配置环境
 
@@ -132,3 +131,4 @@ wssybbz@ubuntu:~/lerobot$ source venv/bin/activate
 ```
 
 ![image-20250116221349853](./images/Ubuntu安装steamtools和venv/image-20250116221349853.png)
+
