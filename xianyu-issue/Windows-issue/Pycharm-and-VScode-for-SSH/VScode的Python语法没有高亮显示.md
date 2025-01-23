@@ -42,7 +42,15 @@
 
 
 
+# 问题描述4
 
+vscode（1.96.4）远程ssh后，在检查python语法的时候，代码出现蓝色的波浪线，并显示"xxxxx":Unknown word.cSpell
+
+得出结论：安装了拼写检查插件（比如*Code Spell Checker）* ，禁用或者卸载即可（果然卸载了Code Spell Checker就解决了）
+
+![PixPin_2025-01-23_17-43-49](./images/VScode的Python语法没有高亮显示/PixPin_2025-01-23_17-43-49.png)
+
+![img](./images/VScode的Python语法没有高亮显示/c570e983fd60a6ae03f4e9a60ac0cdc0.png)
 
 # 参考：
 
@@ -53,6 +61,8 @@
 [（已解决）vscode python 代码高亮异常 - 引入的包不显示 - MoonOut - 博客园](https://www.cnblogs.com/moonout/p/17173711.html)
 
 [VSCode Python代码无高亮 Pylance运行异常_vscode pylance-CSDN博客](https://blog.csdn.net/weixin_47284189/article/details/136343653)
+
+[VS code：代码出现蓝色波浪线，提示显示 xxxx: Unknown word.cSpell-CSDN博客](https://blog.csdn.net/Johnlone_/article/details/123824129)
 
 
 
