@@ -1,0 +1,23 @@
+# 背景
+
+vscode通过ssh远程连接服务器的时候，报错：Got bad result from install script.
+
+然后还有就是cmd也是打不来的（一打开就闪退）
+
+
+
+解决方案：
+
+1.win+R打开 regedit
+
+2.将注册表HKEY_CURRENT_USER\Software\Microsoft\Command Processor\AutoRun 的值设置为空白，以前可能是if exists或者0，删了设置为空白即可
+
+3.安装以上操作完成后，关闭vscode，打开cmd发现可以打开没问题，重新打开vscode，重新ssh连接即可成功。
+
+
+
+# 参考：
+
+[vscode远程连接Got bad result from install script.-CSDN博客](https://blog.csdn.net/u014541802/article/details/131722348)
+
+[打不开cmd/cmd闪退问题解决_注册表没有disablecmd-CSDN博客](https://blog.csdn.net/qq_55526753/article/details/124193064)
