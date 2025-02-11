@@ -120,12 +120,15 @@ hypervisor.cpuid.v0= FALSE
 
 ### 检查系统是否开启 nouveau 驱动
 
-（Nouveau 是一个开源项目，旨在为 NVIDIA 图形处理器提供高质量的自由软件驱动程序。它由 Linux 内核中的 KMS 驱动（nouveau），Mesa 中的 Gallium3D 驱动，以及 Xorg DDX（xf86-video-nouveau）组成。这个项目的目标是提供对 NVIDIA 显卡的完整支持，包括 2D/3D 加速、视频解码加速等功能。Nouveau 驱动程序是通过逆向工程 NVIDIA 的专有驱动程序开发的，因此它不受 NVIDIA 官方的支持。）
+Nouveau 是一个开源项目，旨在为 NVIDIA 图形处理器提供高质量的自由软件驱动程序。它由 Linux 内核中的 KMS 驱动（nouveau），Mesa 中的 Gallium3D 驱动，以及 Xorg DDX（xf86-video-nouveau）组成。
+这个项目的目标是提供对 NVIDIA 显卡的完整支持，包括 2D/3D 加速、视频解码加速等功能。
+Nouveau 驱动程序是通过逆向工程 NVIDIA 的专有驱动程序开发的，因此它不受 NVIDIA 官方的支持。
 
 ```
+	#检查是否开启了 nouveau 
 lsmod | grep nouveau    # 有输出代表已启用
 -------------------------------------------
-    ##禁用nouveau启动方法1
+    ##禁用nouveau启动方法1 （没有则创建dist-blacklist.conf）
 vim /lib/modprobe.d/dist-blacklist.conf
     #将 nvidiafb 配置注释掉。
         # blacklist nvidiafb
@@ -179,10 +182,6 @@ yum install pciutils
 # 检查是否发现显卡
 lspci | grep -i nvidia  
 
-
-
-
-
 dmesg | grep NVRM  #查看驱动无法启动原因
 ```
 
@@ -201,14 +200,10 @@ sudo apt install -y nvidia-driver-545
 nvidia-smi
 
 
-
 注意：
 nvidia-driver-xxx :这是适配大多数用户，一般情况下都可以安装这个
 nvidia-driver-xxx-server ：这个适配服务器，有多块GPU调度等情况
 nvidia-driver-xxx-open ：这个是开源版本，可以自己修改
-
-
-
 
 
 报错获取更多信息：
