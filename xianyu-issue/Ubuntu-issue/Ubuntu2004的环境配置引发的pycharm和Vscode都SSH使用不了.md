@@ -1,10 +1,15 @@
 # 背景
 
-一台Ubuntu20.04的服务器，使用pycharm的SSH配置服务器的，然后配置远程配置Python解释器，使用conda，但是一切都配置好，点击创建一点反应都没有。然后切换成为系统解释器，点击确定，就弹出bash： env 未找到命令。
+一台Ubuntu20.04的服务器，使用pycharm2024.3.3的SSH配置服务器的，然后配置远程配置Python解释器，使用conda，但是一切都配置好，点击创建一点反应都没有。然后切换成为系统解释器，点击确定，就弹出bash： env 未找到命令。
 
 ![PixPin_2025-02-27_16-10-15](./images/Ubuntu2004的环境配置引发的pycharm和Vscode都SSH使用不了/PixPin_2025-02-27_16-10-15.png)
 
 ![PixPin_2025-02-27_16-11-05](./images/Ubuntu2004的环境配置引发的pycharm和Vscode都SSH使用不了/PixPin_2025-02-27_16-11-05.png)
+
+其中可以在（Windows）C:\Users\MVGZ0040\AppData\Local\JetBrains\PyCharm2024.3\log\idea.log 可以看到IDE的日志输出
+（Linux）~/.config/JetBrains/PyCharm2022.2/options/jdk.table.xml 
+
+
 
 Pycharm不行，那么使用Vscode来连接呢？输入密码后，结果显而易见，也不行，直接就连接不上，如果你注意看的话，会发现报错说什么bash：sh：找不到命令
 ![PixPin_2025-02-27_16-24-35](./images/Ubuntu2004的环境配置引发的pycharm和Vscode都SSH使用不了/PixPin_2025-02-27_16-24-35.png)

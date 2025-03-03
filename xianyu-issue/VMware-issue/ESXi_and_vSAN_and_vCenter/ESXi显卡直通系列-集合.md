@@ -210,6 +210,14 @@ nvidia-driver-xxx-open ：这个是开源版本，可以自己修改
 cat /proc/driver/nvidia/version
 cat /sys/module/nvidia/version
 dkms status
+ 
+nvidia - smi 无法与显卡驱动通信时，查看日志、报错及定位问题的方法有如下：
+#可查看与 NVIDIA 服务直接相关的日志，如果在nvidia后加*则nvidia 开头的服务日志
+journalctl -u nvidia
+
+dmesg 用于显示内核环缓冲区的信息，也就是内核在启动过程中产生的信息
+# 可提取与 NVIDIA 相关的内核信息，这些信息可能包含硬件检测、驱动加载等关键内容。
+dmesg | grep -i nvidia
 ```
 
 
