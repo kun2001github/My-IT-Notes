@@ -140,7 +140,17 @@ os.environ["https_proxy"] = "http://127.0.0.1:7890"
 os.environ["ALL_PROXY"] = "http://127.0.0.1:7890"
 ```
 
+# linux使用Clash工具
 
+## 命令终端+webUI的
+
+### 使用[nelvko/clash-for-linux-install: 😼 优雅地部署基于 clash/mihomo 的代理环境](https://github.com/nelvko/clash-for-linux-install)
+
+### 使用[Elegycloud/clash-for-linux-backup： 基于Clash Core制作的Clash For Linux备份仓库 基于Clash Core 的Clash For Linux备份仓库 --- Elegycloud/clash-for-linux-backup: 基于Clash Core 制作的Clash For Linux备份仓库 A Clash For Linux Backup Warehouse Based on Clash Core](https://github.com/Elegycloud/clash-for-linux-backup)
+
+## 可视化的UI
+
+[Releases · lantongxue/clash_for_windows_pkg](https://github.com/lantongxue/clash_for_windows_pkg/releases)
 
 
 
@@ -172,6 +182,9 @@ curl ipinfo.io
   "readme": "https://ipinfo.io/missingauth"
 }
 
+curl "http://ip-api.com/json?lang=zh-CN"
+{"status":"success","country":"中国","countryCode":"CN","region":"GD","regionName":"广东","city":"广州市","zip":"510000","lat":23.1317,"lon":113.266,"timezone":"Asia/Shanghai","isp":"Chinanet","org":"Chinanet GD","as":"AS4134 CHINANET-BACKBONE","query":"14.31.169.177"}
+
 
 curl google.com -vvv
 curl www.google.com -vvv
@@ -180,7 +193,7 @@ curl www.google.com.hk -vvv
 
 返回 IP 如果是代理服务器 IP 说明当前终端下已经走代理了。
 
-- 测试终端环境下是否走了代理，使用 `ping google.com` 是可能不行的，因为 ping 命令既不是 HTTP 也不是 HTTPS 协议，而是 ICMP 协议，始终是不走代理的，如果要 ping 也走代理，那么需要一些比较高级的方法，比如配置透明代理之类的，本文就不涉及了。
+- 测试终端环境下是否走了代理，使用 `ping google.com` 是可能不行的，因为 ping 命令既不是 HTTP 也不是 HTTPS 协议，而是 ICMP 协议，始终是不走代理的，代理只走了HTTP/S协议，所以如果要 ping 也走代理，那么需要一些比较高级的方法，比如配置透明代理之类的，我这里就不涉及。
 
 
 

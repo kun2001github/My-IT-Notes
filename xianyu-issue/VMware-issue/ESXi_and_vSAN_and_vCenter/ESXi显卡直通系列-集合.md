@@ -194,6 +194,12 @@ sudo lspci | grep -i nvidia
 sudo apt update
 #然后查看Ubuntu官方软件源中的NVIDIA驱动程序，会显示出适用于系统中 NVIDIA 显卡的推荐驱动程序
 sudo ubuntu-drivers devices | grep "nvidia"
+
+###如果提示sudo: ubuntu-drivers: command not found
+###解决方法
+sudo apt-get install ubuntu-drivers-common
+
+
 #这里选择安装比较新的545版本进行安装，执行：
 sudo apt install -y nvidia-driver-545
 #等待驱动程序安装完成后，验证一下安装，运行以下命令查看显卡信息：         
@@ -262,6 +268,16 @@ sudo apt-get purge nvidia*
 sudo apt-get autoremove
 sudo reboot
 ```
+
+
+
+
+
+
+
+
+
+![image-20250304203339128](./images/ESXi显卡直通系列-集合/image-20250304203339128.png)
 
 
 
