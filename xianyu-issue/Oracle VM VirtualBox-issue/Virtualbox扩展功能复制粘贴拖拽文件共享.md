@@ -64,14 +64,16 @@ PS：记得在状态栏》设备》共享粘贴板/拖放/开启状态哦
 
   ```powershell
   sudo apt install bzip2 build-essential gcc make perl dkms linux-headers-$(uname -r)
+  
+  Ubuntu22.04.5（virtualbox7.1.6 r167084）
   ```
 
   接下来，运行目录中的安装程序以开始安装 Guest Additions：
-
+  
   ```undefined
   sudo ./VBoxLinuxAdditions.run
   ```
-
+  
   
 
 ![img](https://cn.linux-terminal.com/common-images/virtualbox-guest-additions-ubuntu/install-guestadditions.webp)
@@ -94,20 +96,77 @@ sudo gpasswd --add $USER vboxusers
 
 
 
-
-
-# 挂载问题
-
-等更新
+注意：其实拖拽文件实现复制粘贴，好像只能从宿主机中拖拽文件到虚拟机可以，但是从虚拟机拖拽不了文件到宿主机（原因未知）解决方法就是使用文件共享解决
 
 
 
+# VirtualBox虚拟机拖放文件失败的问题（报错DnD: Error）
 
+Ubuntu22.04.5（virtualbox7.1.6 r167084）可能会有如下报错：
 
+文字复制粘贴，但是如果拖拽文件的话，就报错，具体图2
+
+![PixPin_2025-03-05_16-19-22](./images/Virtualbox扩展功能复制粘贴拖拽文件共享/PixPin_2025-03-05_16-19-22.png)
 
 ![image-20250112151956117](./images/Virtualbox扩展功能复制粘贴拖拽文件共享/image-20250112151956117.png)
 
+解决方法：经过检查，发现Ubuntu 22.04（注意22.04及以上版本默认使用的都是Wayland）的桌面使用了Wayland，导致这个问题，解决方法就是修改 `/etc/gdm3/custom.conf` ，取消注释 `WaylandEnable=false` → 重启主机切换为X11即可解决。
 
+
+
+## 排查方法
+
+1. **检查进程是否运行（Linux系统专用）**
+
+   - 在虚拟机内执行 `ps aux | grep VBoxClient`，确认存在 `/usr/bin/VBoxClient --clipboard` 进程[1](https://blog.csdn.net/corner2030/article/details/80206505)。
+
+   - 若进程未启动，手动执行：
+
+     ```
+     VBoxClient --clipboard
+     ```
+
+     或安装 `virtualbox-guest-x11` 包（Ubuntu/Debian）
+
+     ```
+     sudo apt install virtualbox-guest-x11
+     ```
+
+2.**排查解决窗口系统兼容性问题（Ubuntu主机专用）**
+
+- 若主机为Ubuntu且使用Wayland窗口系统，可能(有概率)导致拖放失效。
+- 修改 `/etc/gdm3/custom.conf` ，取消注释 `WaylandEnable=false` → 重启主机切换为X11
+
+###  检查Ubuntu是否为Wayland
+
+#### 一、命令行检测方法
+
+1.查看会话类型变量
+
+   ```
+   echo $XDG_SESSION_TYPE 
+   ```
+   - 若输出 `wayland`，则当前为Wayland；
+
+   - 若输出 `x11`，则为X11
+2.检查Wayland专用变量
+```
+echo $WAYLAND_DISPLAY 
+```
+- 若返回类似 `wayland-0` 的路径，表示使用Wayland；
+- 若无输出，则可能为X11
+3.通过系统日志工具查询（使用 `loginctl` 命令查看当前会话属性）
+```
+loginctl show-session $(loginctl | grep $(whoami) | awk '{print $1}') -p Type 
+```
+- 输出 `Type=wayland` 或 `Type=x11` 直接标明当前窗口系统
+####  二、图形界面检测方法
+1. 登录界面检查
+   - 在Ubuntu登录界面，点击用户名后方的齿轮图标（⚙️），查看选项：
+     - 若包含 `Ubuntu on Xorg` 或 `Ubuntu (Wayland)`，当前选择的即为窗口系统类型[1](https://blog.csdn.net/sunyuhua_keyboard/article/details/145007430)[2](https://blog.csdn.net/hua_chi/article/details/139961070)。
+2. 系统设置验证
+   - 打开「设置」→「关于」→「窗口系统」：
+     - 若显示 `Wayland` 或 `X11`，则为当前使用的窗口系统（部分Ubuntu版本可能不显示此信息）。
 
 
 
