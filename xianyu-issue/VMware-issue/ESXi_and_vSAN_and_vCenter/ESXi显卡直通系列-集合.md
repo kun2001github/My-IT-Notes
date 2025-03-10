@@ -193,7 +193,7 @@ sudo lspci | grep -i nvidia
 #更新系统的本地软件包列表，获取软件源中可用软件包的最新信息
 sudo apt update
 #然后查看Ubuntu官方软件源中的NVIDIA驱动程序，会显示出适用于系统中 NVIDIA 显卡的推荐驱动程序
-sudo ubuntu-drivers devices | grep "nvidia"
+sudo ubuntu-drivers devices
 #这里选择安装比较新的545版本进行安装，执行：
 sudo apt install -y nvidia-driver-545
 #等待驱动程序安装完成后，验证一下安装，运行以下命令查看显卡信息：         
