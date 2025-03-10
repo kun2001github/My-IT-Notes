@@ -262,12 +262,83 @@ SSH版本：OpenSSH_6.6.1p1 Ubuntu-2ubuntu2.12, OpenSSL 1.0.1f 6 Jan 2014
 
 ### 在Windows服务器安装openssh-server
 
+### 使用 [PowerShell](https://zhida.zhihu.com/search?content_id=115463163&content_type=Article&match_order=1&q=PowerShell&zhida_source=entity) 安装 OpenSSH
 
+若要使用 PowerShell 安装 OpenSSH，请先以管理员身份运行 PowerShell。 为了确保 OpenSSH 可用，请运行以下 cmdlet：
 
+```text
+Get-WindowsCapability -Online | Where-Object Name -like 'OpenSSH*'
+```
 
+如果两者均尚未安装，则此操作应返回以下输出：
+
+```text
+Name  : OpenSSH.Client~~~~0.0.1.0
+State : NotPresent
+
+Name  : OpenSSH.Server~~~~0.0.1.0
+State : NotPresent
+```
+
+然后，根据需要安装服务器或客户端组件：
+
+```text
+# Install the OpenSSH Client
+Add-WindowsCapability -Online -Name OpenSSH.Client~~~~0.0.1.0
+
+# Install the OpenSSH Server
+Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0
+```
+
+这两者应该都会返回以下输出：
+
+```text
+Path          :
+Online        : True
+RestartNeeded : False
+```
+
+参考：[vscode Remote-ssh 远程控制windows主机 - 知乎](https://zhuanlan.zhihu.com/p/122999157)
 
 ##### 解决windows禁用powershell脚本
 
+首次在计算机上启动 Windows PowerShell 时，现用执行策略很可能是 `Restricted`（默认设置）。
+
+`Restricted` 策略不允许任何脚本运行。
+
+若要了解计算机上的现用执行策略，请键入：
+
+```csharp
+get-executionpolicy
+```
+
+若要在本地计算机上运行您编写的未签名脚本和来自其他用户的签名脚本，请使用以下命令将计算机上的
+执行策略更改为 `RemoteSigned`：
+
+```dos
+set-executionpolicy remotesigned
+```
+
+有关详细信息，请参阅 Set-ExecutionPolicy。
+
+执行`set-ExecutionPolicy RemoteSigned` ：
+
+```css
+执行策略更改
+执行策略可以防止您执行不信任的脚本。更改执行策略可能会使您面临 about_Execution_Policies
+帮助主题中所述的安全风险。是否要更改执行策略?
+[Y] 是(Y)  [N] 否(N)  [S] 挂起(S)  [?] 帮助 (默认值为“Y”): y
+```
+
+## 坑
+
+##### 如果安装了安全软件会导致连接不上（例如火绒会拦截vscode发的powshell脚本）
+
+最好把安全软件关闭，或者是在连接的时候检查是否有拦截
+
+
+
+PS：如果是mac端的vscode，最好是在Remote.SSH:RemotePlatform中设置远程主机名的类型
 
 
 
@@ -275,6 +346,21 @@ SSH版本：OpenSSH_6.6.1p1 Ubuntu-2ubuntu2.12, OpenSSL 1.0.1f 6 Jan 2014
 
 
 
+## win端的vscode在ssh连接远程服务器的时候报错
+
+![3b0bc661b07418be55373768d88821f0](./images/Pycharm或VScode连接跳板机服务器/3b0bc661b07418be55373768d88821f0.png)
+
+![bfb0c71831e9705bb7e04c1528db1a9c](./images/Pycharm或VScode连接跳板机服务器/bfb0c71831e9705bb7e04c1528db1a9c.png)
+
+
+
+![	](./images/Pycharm或VScode连接跳板机服务器/723d751b8f4a514a892e337d0b73f43d.png)
+
+
+
+![08670408f40d36a9b37ad536c3909e89](./images/Pycharm或VScode连接跳板机服务器/08670408f40d36a9b37ad536c3909e89.png)
+
+参考链接：[.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC不是可识别的文件，程序_cannot load cannot load .vbe;.js;.jse;.wsf-CSDN博客](https://blog.csdn.net/qq_41549459/article/details/88323150)
 
 # vscode通过ssh连接服务器报错原因总结
 
@@ -365,7 +451,7 @@ respecting_nature@YunChus-MacBook-Pro~%
 
 
 
-### 跳板机
+# 跳板机
 
 [跳板机技术ProxyJump 和 ProxyCommand-CSDN博客](https://blog.csdn.net/m0_49448331/article/details/143897010)
 
