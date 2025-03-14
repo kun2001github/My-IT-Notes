@@ -129,7 +129,7 @@ Nouveau 驱动程序是通过逆向工程 NVIDIA 的专有驱动程序开发的�
 lsmod | grep nouveau    # 有输出代表已启用
 -------------------------------------------
     ##禁用nouveau启动方法1 （没有则创建dist-blacklist.conf）
-vim /lib/modprobe.d/dist-blacklist.conf
+sudo vim /lib/modprobe.d/dist-blacklist.conf
     #将 nvidiafb 配置注释掉。
         # blacklist nvidiafb
     #在尾部添加以下配置
@@ -195,9 +195,20 @@ sudo apt update
 #然后查看Ubuntu官方软件源中的NVIDIA驱动程序，会显示出适用于系统中 NVIDIA 显卡的推荐驱动程序
 sudo ubuntu-drivers devices | grep "nvidia"
 
+
+#########如果你输入，什么都没有输出的话，是源的问题，添加官方源
+sudo add-apt-repository ppa:graphics-drivers/ppa
+
+
+
 ###如果提示sudo: ubuntu-drivers: command not found
 ###解决方法
 sudo apt-get install ubuntu-drivers-common
+
+
+
+
+
 
 
 #这里选择安装比较新的545版本进行安装，执行：
