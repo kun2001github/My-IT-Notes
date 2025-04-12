@@ -170,7 +170,27 @@ loginctl show-session $(loginctl | grep $(whoami) | awk '{print $1}') -p Type
 
 
 
+#### 三、修改命令
 
+- 若主机为Ubuntu且使用Wayland窗口系统，可能(有概率)导致拖放失效。
+
+- 修改 `/etc/gdm3/custom.conf` ，取消注释 `WaylandEnable=false` → 重启主机切换为X11
+
+  ```
+  #1使用 sed 取消注释 WaylandEnable=false
+  
+  sudo sed -i 's/^#WaylandEnable=false/WaylandEnable=false/' /etc/gdm3/custom.conf
+  
+  #2检查修改是否成功
+  
+  grep "WaylandEnable" /etc/gdm3/custom.conf
+  
+  #3重启主机以应用更改
+  
+  sudo reboot
+  ```
+
+  
 
 # 参考
 

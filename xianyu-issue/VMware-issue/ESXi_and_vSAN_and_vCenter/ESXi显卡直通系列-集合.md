@@ -125,16 +125,16 @@ sudo vim /lib/modprobe.d/dist-blacklist.conf
     #将 nvidiafb 配置注释掉。
         # blacklist nvidiafb
     #在尾部添加以下配置
-        blacklist nouveau
-        options nouveau modeset=0
+blacklist nouveau
+options nouveau modeset=0
     #保存退出
          :wq!
 ------------------------------------------
     ##禁用内核模块 nouveau启动方法2
-vim /etc/modprobe.d/blacklist-nvidia-nouveau.conf
+sudo vim /etc/modprobe.d/blacklist-nvidia-nouveau.conf
     #在尾部添加：
-        blacklist nouveau
-        options nouveau modeset=0   
+blacklist nouveau
+options nouveau modeset=0   
     #保存退出
         :wq!
 --------------------------------------------
@@ -186,16 +186,16 @@ sudo lspci | grep -i nvidia
 sudo apt update
 #然后查看Ubuntu官方软件源中的NVIDIA驱动程序，会显示出适用于系统中 NVIDIA 显卡的推荐驱动程序
 sudo ubuntu-drivers devices
-
-
-#########如果你输入，什么都没有输出的话，是源的问题，添加官方源
-sudo add-apt-repository ppa:graphics-drivers/ppa
-
-
+sudo ubuntu-drivers devices | grep "nvidia"
 
 ###如果提示sudo: ubuntu-drivers: command not found
 ###解决方法
 sudo apt-get install ubuntu-drivers-common
+
+####如果没有任何输出，是因为源的问题
+####解决方法
+sudo add-apt-repository ppa:graphics-drivers/ppa
+sudo apt-get update
 
 #这里选择安装比较新的545版本进行安装，执行：
 sudo apt install -y nvidia-driver-545
@@ -272,13 +272,61 @@ sudo reboot
 
 
 
-![image-20250304203339128](./images/ESXi显卡直通系列-集合/image-20250304203339128.png)
 
 
 
 
 
 2025.03.17 重大发现：Ubuntu20.04+5070TI显卡需要用run安装，不能使用apt安装，会失败。
+
+
+
+
+### 使用run方式安装
+
+会发现NVidia官网是找不到Tesla T10这个显卡驱动的，因为它是一张云游戏服务器的特供显卡，不在官方列表里面。但是用Tesla T4的显卡驱动也是可以的。以及ubuntu24.04需要安装cuda，只能找12.5以上的版本才支持Ubuntu24.04。
+
+![PixPin_2025-03-27_13-59-36](./images/ESXi显卡直通系列-集合/PixPin_2025-03-27_13-59-36.png)
+
+
+
+## 在安装驱动前，确保系统已安装必要的编译工具：
+
+```
+sudo apt update
+sudo apt install gcc make linux-headers-$(uname -r) build-essential
+```
+
+## 赋予驱动文件执行权限并安装：
+
+```
+sudo chmod +x NVIDIA-Linux-x86_64-*.run
+sudo ./NVIDIA-Linux-x86_64-*.run 
+```
+
+![有道截屏翻译结果_1743054783335](./images/ESXi显卡直通系列-集合/有道截屏翻译结果_1743054783335.png)
+
+
+
+![有道截屏翻译结果_1743054742492](./images/ESXi显卡直通系列-集合/有道截屏翻译结果_1743054742492.png)
+
+在构建的buil的时候会出现2个警告（可能）
+
+![有道截屏翻译结果_1743054805514](./images/ESXi显卡直通系列-集合/有道截屏翻译结果_1743054805514.png)
+
+
+
+![有道截屏翻译结果_1743054868429](./images/ESXi显卡直通系列-集合/有道截屏翻译结果_1743054868429.png)
+
+
+
+![有道截屏翻译结果_1743054901818](./images/ESXi显卡直通系列-集合/有道截屏翻译结果_1743054901818.png)
+
+
+
+![有道截屏翻译结果_1743054969774](./images/ESXi显卡直通系列-集合/有道截屏翻译结果_1743054969774.png)
+
+![PixPin_2025-03-27_15-00-03](./images/ESXi显卡直通系列-集合/PixPin_2025-03-27_15-00-03.png)
 
 
 
