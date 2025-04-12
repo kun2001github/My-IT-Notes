@@ -433,7 +433,37 @@ respecting_nature@YunChus-MacBook-Pro~%
 
 
 
+## 背景
 
+2台win，都在同一个网络下，都可以ping通，但是只有一台win能连接到服务器（ubuntu22.04），另外一台连不上。报错如下：
+
+![image-20250315141208432](./images/Pycharm或VScode连接跳板机服务器/image-20250315141208432.png)
+
+
+
+可以清楚的发现，连接的是192.168.10.209，但是返回确是192.168.19.209超时，这是为什么呢？
+
+进过排查，发现这个是因为错误的配置config导致的，配置如下
+
+```
+Host 192.168.10.209
+ HostName 192.168.19.209
+ User kexin
+```
+
+你可以看到HostName里面写的是192.168.19.209，就是这惹的祸，把19改为10即可解决。
+
+
+
+
+
+
+
+## 新版vscode的ssh连接无网络的服务器，手动下载vscode-server教程
+
+[vscode 远程 linux(包括离线vscode-server安装，免密登录方法)_vscode-server-linux-CSDN博客](https://blog.csdn.net/qq_43623902/article/details/136258880)
+
+[Visual Studio Code 服务器 --- Visual Studio Code Server](https://code.visualstudio.com/docs/remote/vscode-server)
 
 
 
