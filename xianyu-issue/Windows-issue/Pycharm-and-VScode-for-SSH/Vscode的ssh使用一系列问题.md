@@ -14,7 +14,17 @@
 
 
 
+## 报错截图：
 
+![](./images/Vscode的ssh使用一系列问题/b587b1b5369b74d3181d6ad27d28a612.png)
+
+![9e14208195d95ceb16a3d60e5c6ad55e](./images/Vscode的ssh使用一系列问题/9e14208195d95ceb16a3d60e5c6ad55e.png)
+
+![4057d3d7fb58e731314fe709c83c7ef3](./images/Vscode的ssh使用一系列问题/4057d3d7fb58e731314fe709c83c7ef3.png)
+
+![f923e259248131a224ca9a798793e6d2](./images/Vscode的ssh使用一系列问题/f923e259248131a224ca9a798793e6d2.png)
+
+![7c4d5bc65070e9589aec6097d471d82e](./images/Vscode的ssh使用一系列问题/7c4d5bc65070e9589aec6097d471d82e.png)
 
 # 解决方法
 
