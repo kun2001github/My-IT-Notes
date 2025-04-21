@@ -329,6 +329,30 @@ sudo ./NVIDIA-Linux-x86_64-*.run
 
 
 
+## ubuntu22.04安装nvidia 5090  的570.133.07版本驱动
+
+！ 使用apt的方式安装是失败的，安装上后，输入nvidia-smi会提示：no devices were found
+
+必须使用run的方式安装
+
+```
+sudo apt update
+sudo apt install gcc make linux-headers-$(uname -r) build-essential
+
+#这里安装的是gcc 11.4.0的版本，但是这个版本不知道为什么无法使用-ftrivial-auto-var-init=zero这个选项，所有需要切换为gcc12
+
+sudo apt-get install gcc-12 g++-12
+sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-12 60
+sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-12 60
+
+chmod +x NVIDIA-Linux-x86_64-570.133.07.run
+sudo bash ./NVIDIA-Linux-x86_64-570.133.07.run
+```
+
+
+
+### 使用run方式安装的参数
+
 
 
 # 问题报错
