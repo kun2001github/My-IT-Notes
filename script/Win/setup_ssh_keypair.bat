@@ -2,22 +2,29 @@
 chcp 65001
 setlocal enabledelayedexpansion
 
-:: ==========================================
-:: SSH 免密登录自动配置脚本
-:: 功能：检测服务器支持的密钥类型，生成以用户名命名的密钥并上传
-:: ==========================================
+@REM :: ==========================================
+@REM :: SSH 免密登录自动配置脚本
+@REM :: 作者：kun2001github
+@REM :: 日期：2025.05.24
+@REM :: 版本：1.0.1
+@REM :: 说明：该脚本将检测服务器支持的密钥类型，生成以用户名命名的密钥并上传到服务器
+@REM :: ==========================================
 
 :: 配置远程服务器信息;
+echo ************【自动配置免密登录脚步】****************
+echo.
 echo 请输入远程服务器信息(用户名、IP地址、端口号)
-set /p "REMOTE_USER=请输入远程用户名: ";
-set /p "REMOTE_HOST=请输入远程服务器IP地址: ";
-set /p "REMOTE_PORT=请输入SSH端口号 (默认22): ";
+set /p "REMOTE_USER=请输入远程用户名: "
+set "REMOTE_USER=%REMOTE_USER: =%"
+set /p "REMOTE_HOST=请输入远程服务器IP地址: "
+set "REMOTE_HOST=%REMOTE_HOST: =%"
+set /p "REMOTE_PORT=请输入SSH端口号 (默认22): "
+set "REMOTE_PORT=%REMOTE_PORT: =%"
 if "%REMOTE_PORT%"=="" set "REMOTE_PORT=22"
 set "KEY_DIR=%USERPROFILE%\.ssh"
 if not exist "%KEY_DIR%" mkdir "%KEY_DIR%"
 
-
-::测试使用
+::测试使用;
 @REM set REMOTE_USER=ubuntu
 @REM set REMOTE_HOST=192.168.23.133
 @REM set REMOTE_PORT=22
@@ -164,6 +171,7 @@ if errorlevel 1 (
     echo 私钥位置：!KEY_FILE!
     echo 公钥位置：!KEY_FILE!.pub
     echo 连接命令：ssh -i "!KEY_FILE!" -p %REMOTE_PORT% %REMOTE_USER%@%REMOTE_HOST%
+    echo config配置填写路径： IdentityFile !KEY_FILE!
     echo ========================================
 )
 

@@ -1,5 +1,15 @@
-rem::解决中文乱码的
+@echo off
 chcp 65001
+setlocal enabledelayedexpansion
+
+@REM ==========================================
+@REM :: Windows 磁盘清理助手
+@REM :: 作者：kun2001github
+@REM :: 日期：2025.05.24
+@REM :: 版本：1.2.0
+@REM :: 说明：清理磁盘空间，清理系统垃圾
+@REM :: ==========================================
+
 
 rem::获取管理员权限
 @echo off
