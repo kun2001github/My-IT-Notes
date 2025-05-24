@@ -20,10 +20,6 @@ sudo ln -s libarchive.so.*的路径 /usr/lib64
 
 ```
 
-![Clip_2024-10-29_14-42-18](C:\Users\MVGZ0040\AppData\Local\Programs\PixPin\Temp\Clip_2024-10-29_14-42-18.png)
-
-![Clip_2024-10-29_14-43-09](C:\Users\MVGZ0040\AppData\Local\Programs\PixPin\Temp\Clip_2024-10-29_14-43-09.png)
-
 
 
 参考：[【Conda报错】(libarchive.so.20: cannot open shared object file: No such file or directory)-CSDN博客](https://blog.csdn.net/qq_44246618/article/details/142928837)
