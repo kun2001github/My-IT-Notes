@@ -106,6 +106,35 @@ ForwardAgent yes  # 用于启用 SSH 代理转发（也称为 SSH 代理连接�
 IdentityFile ~/.ssh/id_rsa   # 用于指定私钥的路径
 ```
 
+## 问题，堡垒机设置了免密登录到目标主机
+
+堡垒机设置了免密登录到目标主机，堡垒机输入密码后进去连接目标机没问题
+
+但是在windows上就不行，连接的时候除了需要堡垒机的密码，还需要目标机的密码
+
+以下就是解决方案
+
+```
+Host jhcpu     
+	HostName localhost
+	Port 22     
+	User wangyihui     
+	ProxyCommand cloudflared access ssh --hostname jhcpu.1hui.wang --destination %h:%p
+
+Host hkust_cse
+  HostName lgpu2.cse.ust.hk
+  User ywangrm
+  ProxyJump jhcpu
+  IdentityFile "C:\Users\91904\.ssh\id_rsa"
+  
+  
+  
+ #修改如下把ProxyCommand ssh -W %h:%p jhcpu改为使用  ProxyJump jhcpu
+ #并且在Windows生成密钥，直接添加到目标机上，并配置上  IdentityFile "C:\Users\91904\.ssh\id_rsa"
+```
+
+
+
 # 问题，堡垒机禁止SSH转发导致的一些列问题
 
 ![image-20241214113915683](./images/Pycharm或VScode连接跳板机服务器/image-20241214113915683.png)
