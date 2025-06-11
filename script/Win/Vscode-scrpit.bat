@@ -5,9 +5,10 @@ setlocal enabledelayedexpansion
 @REM ==========================================
 @REM :: VScode 小助手
 @REM :: 作者：kun2001github
-@REM :: 日期：2025.05.24
-@REM :: 版本：2.0.0
+@REM :: 日期：2025.06.12
+@REM :: 版本：2.0.1
 @REM :: 说明：格式化vscode数据，安装vscode客户端，下载vscode server服务端
+
 @REM :: ==========================================
 
 ::-------------------------------------------------------------------------------------------------------------------
@@ -51,6 +52,7 @@ if exist "%USERPROFILE%\.vscode.bak" echo 注意：.vscode 已被备份为.vscod
 if exist "%USERPROFILE%\AppData\Roaming\Code.bak" echo 注意：Code 已被备份为Code.bak
 rename "%USERPROFILE%\.vscode" ".vscode.bak"
 rename "%USERPROFILE%\AppData\Roaming\Code" "Code.bak"
+start explorer.exe
 echo 操作完成... && pause "按下回车键放返回【菜单】..."
 goto input_list
 ::----------------------------------------------------------------------------------------------------------------------
@@ -175,11 +177,13 @@ echo https://update.code.visualstudio.com/commit:!COMMIT_ID!/server-linux-!ARCH!
 echo 开始下载中...
 curl -L "https://update.code.visualstudio.com/commit:%COMMIT_ID%/server-linux-%ARCH%/stable" -o "vscode-server-linux-%ARCH%.tar.gz"
 echo 下载完成...
-echo 正在进行复制到服务器中...
+echo 正在创建必要文件中...
 ssh "%REMOTE_USER%@%REMOTE_HOST%" -p "%REMOTE_PORT%" "mv /home/%REMOTE_USER%/.vscode-server /home/%REMOTE_USER%/.vscode-server.bak && mkdir -p ~/.vscode-server/bin/%COMMIT_ID%/"
+echo 正在进行复制到服务器中...
 scp -P %REMOTE_PORT% "vscode-server-linux-%ARCH%.tar.gz" "%REMOTE_USER%@%REMOTE_HOST%:/home/%REMOTE_USER%/.vscode-server/bin/%COMMIT_ID%/"
+echo 正在解压到服务器中...
 ssh "%REMOTE_USER%@%REMOTE_HOST%" -p "%REMOTE_PORT%" "cd .vscode-server/bin/%COMMIT_ID%/ && tar -xf vscode-server-linux-%ARCH%.tar.gz --strip-components=1"
-echo 复制完成；请打开vscode重新连接...
+echo 操作完成；请打开vscode重新连接...
 
 :vscode-server-download-new
 echo 正在获取VS Code Server的下载链接...
@@ -189,12 +193,14 @@ curl -L "https://vscode.download.prss.microsoft.com/dbazure/download/stable/!COM
 echo https://vscode.download.prss.microsoft.com/dbazure/download/stable/!COMMIT_ID!/vscode_cli_alpine_%ARCH%_cli.tar.gz
 echo 开始vscode cli下载中...
 curl -L "https://vscode.download.prss.microsoft.com/dbazure/download/stable/!COMMIT_ID!/vscode_cli_alpine_%ARCH%_cli.tar.gz" -o "vscode_cli_alpine_%ARCH%_cli.tar.gz"
+echo 正在创建必要文件中...
+ssh "%REMOTE_USER%@%REMOTE_HOST%" -p "%REMOTE_PORT%" "mv /home/%REMOTE_USER%/.vscode-server /home/%REMOTE_USER%/.vscode-server.bak && mkdir -p ~/.vscode-server/cli/servers/Stable-%COMMIT_ID%/server/"
 echo 正在进行复制到服务器中...
-ssh "%REMOTE_USER%@%REMOTE_HOST%" -p "%REMOTE_PORT%" "mv /home/%REMOTE_USER%/.vscode-server /home/%REMOTE_USER%/.vscode-server.bak && mkdir -p ~/.vscode-server/bin/%COMMIT_ID%/ && mkdir -p ~/.vscode-server/cli/servers/Stable-%COMMIT_ID%/server/"
-scp -P %REMOTE_PORT% "vscode-server-linux-%ARCH%.tar.gz" "%REMOTE_USER%@%REMOTE_HOST%:/home/%REMOTE_USER%/.vscode-server/bin/%COMMIT_ID%/"
+scp -P %REMOTE_PORT% "vscode-server-linux-%ARCH%.tar.gz" "%REMOTE_USER%@%REMOTE_HOST%:/home/%REMOTE_USER%/.vscode-server/cli/servers/Stable-%COMMIT_ID%/server/"
 scp -P %REMOTE_PORT% "vscode_cli_alpine_%ARCH%_cli.tar.gz" "%REMOTE_USER%@%REMOTE_HOST%:/home/%REMOTE_USER%/.vscode-server/"
-ssh "%REMOTE_USER%@%REMOTE_HOST%" -p "%REMOTE_PORT%" "cd /home/%REMOTE_USER%/.vscode-server/bin/%COMMIT_ID%/ && tar -xf vscode-server-linux-%ARCH%.tar.gz --strip-components=1 && cd /home/%REMOTE_USER%/.vscode-server/ && tar -xf vscode_cli_alpine_%ARCH%_cli.tar.gz && mv code code-%COMMIT_ID%"
-echo 复制完成；请打开vscode重新连接...
+echo 正在解压到服务器中...
+ssh "%REMOTE_USER%@%REMOTE_HOST%" -p "%REMOTE_PORT%" "cd /home/%REMOTE_USER%/.vscode-server/cli/servers/Stable-%COMMIT_ID%/server/ && tar -xf vscode-server-linux-%ARCH%.tar.gz --strip-components=1 && cd /home/%REMOTE_USER%/.vscode-server/ && tar -xf vscode_cli_alpine_%ARCH%_cli.tar.gz && mv code code-%COMMIT_ID%  && echo Stable-%COMMIT_ID% > /home/%REMOTE_USER%/.vscode-server/cli/iru.json "
+echo 操作完成；请打开vscode重新连接...
 
 pause "按下回车键放返回【菜单】..."
 goto input_list
