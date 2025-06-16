@@ -270,12 +270,6 @@ sudo reboot
 
 ![image-20250304203339128](./images/ESXi显卡直通系列-集合/image-20250304203339128.png)
 
-
-
-
-
-
-
 2025.03.17 重大发现：Ubuntu20.04+5070TI显卡需要用run安装，不能使用apt安装，会失败。
 
 
@@ -303,27 +297,38 @@ sudo chmod +x NVIDIA-Linux-x86_64-*.run
 sudo ./NVIDIA-Linux-x86_64-*.run 
 ```
 
-![有道截屏翻译结果_1743054783335](./images/ESXi显卡直通系列-集合/有道截屏翻译结果_1743054783335.png)
+![image-20250617002520095](./images/ESXi显卡直通系列-集合/image-20250617002520095.png)
+
+![image-20250617002549867](./images/ESXi显卡直通系列-集合/image-20250617002549867.png)
+
+在系统中如果使用了X11作为图形化时，会出现这个提示，如果有这个提示，推荐使用
+Wayland桌面环境安装、或者是使用tty模式安装（当然也可以选择继续安装）
+
+![image-20250616223923980](./images/ESXi显卡直通系列-集合/image-20250616223923980.png)
+
+![image-20250617002631187](./images/ESXi显卡直通系列-集合/image-20250617002631187.png)
+
+![image-20250617002648475](./images/ESXi显卡直通系列-集合/image-20250617002648475.png)
+
+在构建的buil的时候会出现2个警告（可能）（不影响）
+
+![image-20250617002714320](./images/ESXi显卡直通系列-集合/image-20250617002714320.png)
+
+![image-20250617002738120](./images/ESXi显卡直通系列-集合/image-20250617002738120.png)
 
 
 
-![有道截屏翻译结果_1743054742492](./images/ESXi显卡直通系列-集合/有道截屏翻译结果_1743054742492.png)
+![image-20250617002754186](./images/ESXi显卡直通系列-集合/image-20250617002754186.png)
 
-在构建的buil的时候会出现2个警告（可能）
+![image-20250617002812090](./images/ESXi显卡直通系列-集合/image-20250617002812090.png)
 
-![有道截屏翻译结果_1743054805514](./images/ESXi显卡直通系列-集合/有道截屏翻译结果_1743054805514.png)
+![image-20250617002837530](./images/ESXi显卡直通系列-集合/image-20250617002837530.png)
 
+![image-20250617002851167](./images/ESXi显卡直通系列-集合/image-20250617002851167.png)
 
+![image-20250617002901588](./images/ESXi显卡直通系列-集合/image-20250617002901588.png)
 
-![有道截屏翻译结果_1743054868429](./images/ESXi显卡直通系列-集合/有道截屏翻译结果_1743054868429.png)
-
-
-
-![有道截屏翻译结果_1743054901818](./images/ESXi显卡直通系列-集合/有道截屏翻译结果_1743054901818.png)
-
-
-
-![有道截屏翻译结果_1743054969774](./images/ESXi显卡直通系列-集合/有道截屏翻译结果_1743054969774.png)
+![image-20250617002930660](./images/ESXi显卡直通系列-集合/image-20250617002930660.png)
 
 ![PixPin_2025-03-27_15-00-03](./images/ESXi显卡直通系列-集合/PixPin_2025-03-27_15-00-03.png)
 
@@ -331,7 +336,7 @@ sudo ./NVIDIA-Linux-x86_64-*.run
 
 ## ubuntu22.04安装nvidia 5090  的570.133.07版本驱动
 
-！ 使用apt的方式安装是失败的，安装上后，输入nvidia-smi会提示：no devices were found
+注意：使用apt的方式安装是失败的，安装上后，输入nvidia-smi会提示：no devices were found
 
 必须使用run的方式安装
 
@@ -349,9 +354,38 @@ chmod +x NVIDIA-Linux-x86_64-570.133.07.run
 sudo bash ./NVIDIA-Linux-x86_64-570.133.07.run
 ```
 
+### RUN模式-安装选项
+
+```
+1. 跳过 X 服务检查
+--no-x-check
+2. 强制覆盖现有驱动
+--force-install
+3. 不安装 OpenGL 相关文件 仅安装驱动核心文件，避免与系统默认 OpenGL 库冲突（推荐多显卡系统）。
+--no-opengl-files
+4. 跳过 Nouveau 驱动检测（若已手动禁用 Nouveau）。
+--no-nouveau-check
+5. 同时安装 32 位 OpenGL 兼容库（支持 32 位游戏或应用）。
+--install-libglvnd
+6. 禁用驱动签名验证（Secure Boot 启用时）跳过 GCC 版本检查（适用于内核版本不匹配时）。
+--no-cc-version-check
+7. 静默安装（无人值守）自动接受所有默认选项，无需交互（适合脚本化安装）。
+-s
+```
+
+## ubuntu24.04,桌面是lightdm,使用X11,安装rxt5070,版本575.57.08
+
+20250616使用run安装成功输入nvidia-smi可以显示，但是重启后，就无法进桌面，输入nvidis-smi显示no devices were found
 
 
-### 使用run方式安装的参数
+
+使用apt方式安装中，sudo apt install nvidia-driver-570
+
+
+
+
+
+
 
 
 
